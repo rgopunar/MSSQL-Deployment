@@ -1,0 +1,1000 @@
+    9  oc get ns | grep cust
+   10  oc get all -n cust1ns
+   11  oc delete deployment.apps/mssql-dep-cust1  service/cust1-svc cust1-datavol cust1-logvol -n cust1ns
+   12  oc delete deployment mssql-dep-cust1 -n cust1ns
+   13  oc delete pvc cust1-datavol cust1-logvol -n cust1ns
+   14  oc get all -n cust2ns
+   15  oc delete deployment mssql-dep-cust2 -n cust2ns
+   16  oc delete pvc  cust2-datavol  cust2-logvol -n cust2ns
+   17  oc delete ns cust1ns
+   18  oc delete ns cust2ns
+   19  clear
+   20  oc get pv
+   21  clear
+   22  oc get machinesets -n openshift-machine-api
+   23  oc scale machinesets sqlocp410-zz9d6-worker --replicas=3
+   24  oc scale machinesets sqlocp410-zz9d6-worker --replicas=3 -n openshift-machine-api
+   25  oc get storagecluster -n portworx
+   26  oc delete storagecluster sqlocp410-px-cluster-79fda56e-de6c-481d-a5dc-31d800976299  -n portworx
+   27  oc get pods -n portworx
+   28  oc get nodes
+   29  oc get version
+   30  oc version
+   31  oc get pods -n portworx
+   32  watch oc get pods -n portworx
+   33  clear
+   34  oc get pods -n portworx
+   35  oc exec sqlocp410-px-cluster--9534616c-9813-40b3-bff5-2df7e388deb4-7726j  -n portworx -- /opt/pwx/bin/pxctl status
+   36  oc exec sqlocp410-px-cluster-9534616c-9813-40b3-bff5-2df7e388deb4-7726j  -n portworx -- /opt/pwx/bin/pxctl status
+   37  clear
+   38  oc exec sqlocp410-px-cluster-9534616c-9813-40b3-bff5-2df7e388deb4-7726j  -n portworx -- /opt/pwx/bin/pxctl status
+   39  clear
+   40  cd /tpch-backup/ansible
+   41  clear
+   42  ls
+   43  oc get pods
+   44  clear
+   45  ls
+   46  cd group_vars/
+   47  ls
+   48  vi all.yml 
+   49  cd /tpch-backup/ocp/scripts/px/
+   50  ls
+   51  cd sqlpods/
+   52  ls
+   53  mkdir pod-dss
+   54  cp pod1/* pod-dss/
+   55  ls pod-dss/
+   56  cd common/
+   57  ls
+   58  cat bash_com 
+   59  clear
+   60  ls
+   61  vi mssql-sc_repl1_dbremote_hig_hIOProi.yml
+   62  cd ..
+   63  cd pod-dss/
+   64  vi sc-dss.yml
+   65  ls
+   66  oc get sc
+   67  oc apply -f sc-dss.yml 
+   68  oc get sc
+   69  clear
+   70  ls
+   71  cp mssql-data1-pvc.yml mssql-data2-pvc.yml
+   72  cp mssql-data1-pvc.yml mssq-temp-pvc.yml
+   73  clear
+   74  vi mssql-data1-pvc.yml 
+   75  vi mssql-data2-pvc.yml 
+   76  cp mssql-data1-pvc.yml mssql-tempdb-pvc.yml
+   77  vi mssql-tempdb-pvc.yml
+   78  vi mssql-log1-pvc.yml 
+   79  clear
+   80  oc apply -f mssql-data1-pvc.yml 
+   81  oc create ns mssql
+   82  ls
+   83  vi mssql-volumeStrategy1.yml
+   84  oc apply -f mssql-volumeStrategy1.yml 
+   85  oc apply -f mssql-data1-pvc.yml 
+   86  oc apply -f mssql-data2-pvc.yml 
+   87  oc apply -f mssql-tempdb-pvc.yml 
+   88  oc apply -f mssql-log1-pvc.yml 
+   89  oc get pvc -n mssql
+   90  oc describe pvc pod1-data1-pvc 
+   91  oc describe pvc pod1-data1-pvc  -n mssql
+   92  oc exec sqlocp410-px-cluster-9534616c-9813-40b3-bff5-2df7e388deb4-7726j  -n portworx -- /opt/pwx/bin/pxctl status
+   93  oc exec sqlocp410-px-cluster-9534616c-9813-40b3-bff5-2df7e388deb4-7726j  -n portworx -- /opt/pwx/bin/pxctl version
+   94  oc exec sqlocp410-px-cluster-9534616c-9813-40b3-bff5-2df7e388deb4-7726j  -n portworx -- /opt/pwx/bin/pxctl --version
+   95  oc exec sqlocp410-px-cluster-9534616c-9813-40b3-bff5-2df7e388deb4-7726j  -n portworx -- /opt/pwx/bin/pxctl v l
+   96  clear
+   97  vi mssql-data1-pvc.yml 
+   98  oc exec sqlocp410-px-cluster-9534616c-9813-40b3-bff5-2df7e388deb4-7726j  -n portworx -- /opt/pwx/bin/pxctl status
+   99  oc exec sqlocp410-px-cluster-9534616c-9813-40b3-bff5-2df7e388deb4-7726j  -n portworx -- /opt/pwx/bin/pxctl nodes list
+  100  oc exec sqlocp410-px-cluster-9534616c-9813-40b3-bff5-2df7e388deb4-7726j  -n portworx -- /opt/pwx/bin/pxctl --help
+  101  oc exec sqlocp410-px-cluster-9534616c-9813-40b3-bff5-2df7e388deb4-7726j  -n portworx -- /opt/pwx/bin/pxctl cluster --help
+  102  oc exec sqlocp410-px-cluster-9534616c-9813-40b3-bff5-2df7e388deb4-7726j  -n portworx -- /opt/pwx/bin/pxctl cluster l
+  103  ls
+  104  cp mssql-data1-pvc.yml test.yml
+  105  vi test.yml 
+  106  oc apply -f test.yml 
+  107  oc get pvc -n mssql
+  108  oc describe pvc test-pvc -n mssql
+  109  oc  get nodes
+  110  ssh core@10.103.1.139
+  111  cat ~/.ssh/known_hosts
+  112  vi ~/.ssh/known_hosts
+  113  ssh core@10.103.1.139
+  114  ssh core@10.103.1.162
+  115  oc get pvc -n mssql
+  116  oc describe test-pvc -n mssql
+  117  clear
+  118  oc get pvc -n mssql
+  119  oc describe pvc test-pvc  -n mssql
+  120  cat sc -d
+  121  cat sc-dss.yml 
+  122  cat test.yml 
+  123  ssh core@10.103.1.162
+  124  cd ..
+  125  cd common/
+  126  ls
+  127  vi mssql-sc
+  128  vi mssql-sc-prod.yml 
+  129  vi mssql-sc_repl1_dbremote_hig_hIOProi.yml
+  130  cp mssql-sc_repl1_dbremote_hig_hIOProi.yml ../pod-dss/mssql-sc-fp.yml
+  131  vi mssql-sc_repl1_dbremote_hig_hIOProi.yml
+  132  cd ../pod-dss/
+  133  ls
+  134  pwd
+  135  ls
+  136  oc get sc
+  137  oc delete sc px-fast
+  138  oc apply -f mssql-sc-fp.yml 
+  139  oc get sc
+  140  vi test.yml 
+  141  oc delete -f test.yml 
+  142  oc get pvc
+  143  oc get pvc -n mssql
+  144  vi test.yml 
+  145  oc apply -f test.yml 
+  146  oc get pvc -n mssq
+  147  oc get pvc -n mssql
+  148  oc describe pvc test-pvc -n mssql
+  149  oc get pods
+  150  uname -a
+  151  ssh core@10.103.1.162
+  152  cd ..
+  153  cd common/
+  154  ls
+  155  vi  mssql-conf.yml
+  156  oc get all -n mssql
+  157  clear
+  158  oc get ns | grep mssql
+  159  clear
+  160  oc apply -f mssql-conf.yml 
+  161  oc get configmaps 
+  162   -n mssql
+  163  oc get configmaps -n mssql
+  164  oc describe configmaps mssql-config -n mssql
+  165  cd ..
+  166  mkdir test-mssql-conf
+  167  cp pod1/* test-mssql-conf/
+  168  cd test-mssql-conf/
+  169  clear
+  170  ls
+  171  oc get pvc -n mssql
+  172  oc delete pvc pod1-data1-pvc pod1-data2-pvc  pod1-log1-pvc pod1-temp-pvc test-pvc -n mssql
+  173  clear
+  174  ls
+  175  vi mssql-data1-pvc.yml 
+  176  oc apply -f mssql-data1-pvc.yml 
+  177  oc apply -f mssql-log1-pvc.yml 
+  178  oc apply -f mssql-volumeStrategy1.yml 
+  179  vi mssql-deployment-oltp_pod1_configMap.yml 
+  180  clear
+  181  ls
+  182  vi mssql-deployment-oltp_pod1_configMap.yml
+  183  oc get pvc -n mssql
+  184  oc apply -f mssql-deployment-oltp_pod1_configMap.yml
+  185  vi mssql-deployment-oltp_pod1_configMap.yml
+  186  oc get pods -n mssql
+  187  oc describe pod mssql-dep1-pod1-77dc688c74-d5bcl -n mssql
+  188  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  189  vi mssql-deployment-oltp_pod1_configMap.yml 
+  190  oc get pvc -n mssql
+  191  cat mssql-conf.yml 
+  192  vi mssql-deployment-oltp_pod1_configMap.yml 
+  193  oc delete -f mssql-ocp.yml 
+  194  oc apply -f mssql-ocp.yml 
+  195  oc get pods -n mssql
+  196  oc describe pod mssql-deployment-69579fc697-2xjn4  -n mssql
+  197  oc get events -n mssql
+  198  clear
+  199  oc get events -n mssql
+  200  oc get pods -n mssql
+  201  oc exec mssql-deployment-69579fc697-2xjn4 -n mssql -- catt /var/opt/mssql/log/errorlog
+  202  oc logs mssql-deployment-69579fc697-2xjn4 -n mssql
+  203  vi mssql-secret.txt 
+  204  vi ocp-scc.yml 
+  205  oc apply ocp-scc.yml 
+  206  oc apply -f ocp-scc.yml 
+  207  oc adm policy add-scc-to-group restrictedfsgroup system:serviceaccounts:mssql -n mssql
+  208  oc delete -f mssql-ocp.yml 
+  209  clear
+  210  oc get events -n mssql
+  211  clear
+  212  oc get pods -n mssq
+  213  oc get pods -n mssql
+  214  oc apply -f mssql-ocp.yml 
+  215  oc get pods -n mssql
+  216  oc logs mssql-deployment-69579fc697-nc7sr -n mssql
+  217  vi mssql-deployment-oltp_pod1_configMap.yml 
+  218  oc ocp-scc.yml 
+  219  vi ocp-scc.yml 
+  220  oc get events -n mssql
+  221  clear
+  222  oc get pods -nmmssql
+  223  oc get pods -n mssql
+  224  oc delete -f mssql-ocp.yml 
+  225  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  226  clear
+  227  vi ocp-scc.yml 
+  228  oc apply -f ocp-scc.yml -n mssql
+  229  oc adm policy add-scc-to-group restrictedfsgroup system:serviceaccounts:mssql -n mssql
+  230  oc apply -f mssql-ocp.yml 
+  231  oc get pods -n mssql
+  232  oc get events -n mssql
+  233  oc get pods -n mssql
+  234  oc logs mssql-deployment-69579fc697-wt9f4 -n mssql
+  235  vi mssql-ocp.yml 
+  236  oc delete -f mssql-ocp.yml 
+  237  clear 
+  238  oc get pods -n mssqn
+  239  oc get all  -n mssqn
+  240  oc get all  -n mssql
+  241  oc apply -f mssql-ocp.yml -n mssql
+  242  oc get pods -n mssql
+  243  oc logs mssql-deployment-6c59b467b4-88b6v -n mssql
+  244  vi ocp-scc.yml 
+  245  oc delete -f ocp-scc.yml 
+  246  oc apply -f ocp-scc.yml  -n mssql
+  247  oc adm policy add-scc-to-group restrictedfsgroup system:serviceaccounts:mssql -n mssql
+  248  oc delete -f mssql-ocp.yml 
+  249  oc apply -f mssql-ocp.yml  -n mssql
+  250  watch oc get pods -n mssql
+  251  oc get pods -n mssql
+  252  oc get events -n mssql
+  253  oc get scc -n mssql
+  254  clear
+  255  oc get scc -n mssql
+  256  clear
+  257  oc get scc -n mssql
+  258  oc get pvc -n mssql
+  259  oc delete pvc pod1-data1-pvc -n mssql
+  260  oc apply -f ../pod1/mssql-data1-pvc.yml  -n mssql
+  261  oc get pvc -n mssql
+  262  oc delete -f mssql-ocp.yml 
+  263  oc get all -n mssql
+  264  vi ocp-scc.yml 
+  265  oc delete scc restrictedfsgroup
+  266  oc apply -f ocp-scc.yml 
+  267  vi ocp-scc.yml 
+  268  oc apply -f ocp-scc.yml 
+  269  oc adm policy add-scc-to-group restrictedfsgroup system:serviceaccounts:mssql
+  270  oc apply -f mssql-ocp.yml 
+  271  oc get pods -n mssql
+  272  oc logs mssql-deployment-6c59b467b4-pqs4w -n mssql
+  273  clear
+  274  vi mssql-ocp.yml 
+  275  oc get configmaps -n mssql
+  276  oc get configmaps 
+  277  oc delete -f mssql-ocp.yml 
+  278  oc get pods -n mssql
+  279  oc apply -f mssql-ocp.yml 
+  280  oc get pods -n mssql
+  281  oc get events
+  282  oc get events -n mssql
+  283  oc get pods -n mssql
+  284  oc logs mssql-deployment-7d6558d455-q5dkg -n mssql
+  285  clear
+  286  oc get vpc -n mssql
+  287  oc get pvc -n mssql
+  288  oc delete pvc pod1-data1-pvc  -n mssql
+  289  oc get pods -n mssql
+  290  oc apply -f ../pod1/mssql-data1-pvc.yml -n mssql
+  291  oc apply -f mssql-ocp.yml 
+  292  oc get pods -n mssql
+  293  oc get events -n mssql
+  294  oc get pods -n mssql
+  295  oc logs mssql-deployment-7d6558d455-gpqwn -n mssql
+  296  oc delete -f mssql-ocp.yml 
+  297  vi mssql-ocp.yml 
+  298  oc get configmaps 
+  299  oc get configmaps  -n mssql
+  300  oc describe mssql-config -n msql
+  301  oc describe mssql-config -n mssql
+  302  oc describe configmap  mssql-config -n mssql
+  303  oc describe configmap  mssql-config2 -n mssql
+  304  oc describe configmap  mssql-config2 -n mssql -o yml
+  305  oc describe configmap  mssql-config2 -n mssql --o yml
+  306  oc describe configmap  mssql-config2 -n mssql --o yaml
+  307  oc describe configmap  mssql-config2 -n mssql --out yaml
+  308  oc get  configmap  mssql-config2 -n mssql -o yml
+  309  oc get  configmap  mssql-config2 -n mssql -o yaml
+  310  oc get  configmap  mssql-config -n mssql -o yaml
+  311  c;lear
+  312  clear
+  313  vi mssql-ocp.yml 
+  314  oc get pods -n mssql
+  315  oc apply -f mssql-ocp.yml 
+  316  oc get pods -n mssql
+  317  oc describe pod mssql-deployment-5cd47f6d57-f8hxn -n mssql
+  318  oc logs mssql-deployment-5cd47f6d57-f8hxn -n mssql
+  319  oc exec mssql-deployment-5cd47f6d57-f8hxn -n mssql -- cat /var/opt/mssql/mssql.conf
+  320  oc get pods -n mssql
+  321  oc logs mssql-deployment-5cd47f6d57-f8hxn -n mssql
+  322  oc delete pvc mssql-data1-pvc -n mssql
+  323  oc get pvc -n mssql
+  324  oc delete pod1-data1-pvc -n mssql
+  325  oc get pvc -n mssql
+  326  oc delete pod1-data1-pvc -n mssql
+  327  oc get pvc -n mssql
+  328  oc delete pvc pod1-data1-pvc -n mssql
+  329  oc get pvc -n mssql
+  330  oc apply -f ../pod1/mssql-data1-pvc.yml 
+  331  oc get pvc -n mssql
+  332  oc apply -f mssql-ocp.yml 
+  333  oc get pods -n mssql
+  334  oc logs mssql-deployment-5cd47f6d57-sptv2 -n mssql
+  335  vi ocp-scc.yml 
+  336  oc delete -f ocp-scc.yml 
+  337  oc apply -f  ocp-scc.yml 
+  338  oc adm policy add-scc-to-group restrictedfsgroup system:serviceaccounts:mssql
+  339  oc delete -f mssql-ocp.yml 
+  340  oc apply -f mssql-ocp.yml 
+  341  oc get pods -n mssql
+  342  oc logs mssql-deployment-5cd47f6d57-bkvn8 -n mssql
+  343  vi mssql-ocp.yml 
+  344  vi ocp-scc_admin.yml
+  345  oc apply -f ocp-scc_admin.yml 
+  346  oc adm policy add-scc-to-group scc-admin  system:serviceaccounts:mssql
+  347  oc delete -f mssql-ocp.yml 
+  348  oc apply -f mssql-ocp.yml 
+  349  oc get pod -n mssql
+  350  oc logs mssql-deployment-5cd47f6d57-ffbrt -n mssql
+  351  vi mssql-deployment-oltp_pod1
+  352  vi mssql-deployment-oltp_pod1_configMap.yml 
+  353  oc get pvc -nmssql
+  354  oc delete pvc pod1-data1-pvc -n mssql
+  355  oc apply -f ../pod1/mssql-data1-pvc.yml 
+  356  oc get pvc -n mssql
+  357  vi mssql-deployment-oltp_pod1_configMap.yml 
+  358  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  359  oc get pods -n mssql
+  360  oc describe pod mssql-dep1-pod1-7b799587bc-xgnw9 -n mssql
+  361  oc logs mssql-dep1-pod1-7b799587bc-xgnw9 -n mssql
+  362  cat /tpch-backup/ocp/scripts/px/sqlpods/common/mssql.conf
+  363  oc get pods -n mssql
+  364  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  365  vi mssql-deployment-oltp_pod1_configMap.yml 
+  366  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  367  oc get pod -n mssql
+  368  oc pods mssql-dep1-pod1-7cd84dffb7-ckrqr -nmssql
+  369  oc  logs mssql-dep1-pod1-7cd84dffb7-ckrqr -nmssql
+  370  cat '/tpch-backup/ocp/scripts/px/sqlpods/common/mssql.conf'
+  371  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  372  vi mssql-deployment-oltp_pod1_configMap.yml 
+  373  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  374  oc get pods -n mssql ql
+  375  oc get pods -n mssql
+  376  oc logs mssql-dep1-pod1-dbd9c4b58-l72pr -n mssql
+  377  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  378  vi mssql-deployment-oltp_pod1_configMap.yml 
+  379  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  380  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  381  oc get pods -n mssql
+  382  oc log mssql-dep1-pod1-568c88679f-cqqzx -n mssql
+  383  oc logs mssql-dep1-pod1-568c88679f-cqqzx -n mssql
+  384  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  385  vi mssql-deployment-oltp_pod1_configMap.yml 
+  386  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  387  oc get pods -n mssql
+  388  oc log mssql-dep1-pod1-76fb69c957-445sl -n mssql
+  389  oc logs mssql-dep1-pod1-76fb69c957-445sl -n mssql
+  390  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  391  vi mssql-deployment-oltp_pod1_configMap.yml 
+  392  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  393  oc get pods -n mssql
+  394  oc logs mssql-dep1-pod1-747ccdd996-k6588 -n mssql
+  395  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  396  vi mssql-deployment-oltp_pod1_configMap.yml 
+  397  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  398  oc get pods -n mssql
+  399  oc logs mssql-dep1-pod1-6fb44fcd5b-5ghkz -n mssql
+  400  oc get pods -n mssql
+  401  clear
+  402  oc get configmap
+  403  oc get configmap -n mssql
+  404  vi mssql-deployment-oltp_pod1_configMap.yml 
+  405  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  406  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  407  oc get pods -n mssql
+  408  oc logs mssql-dep1-pod1-fc4bc6cf7-vxltl -n mssql
+  409  oc get configmaps  -n mssql
+  410  vi mssql-conf.yml 
+  411  cp mssql-conf mssql.conf
+  412  cp mssql-conf.yml mssql.conf
+  413  vi mssql.conf 
+  414  cat mssql.conf 
+  415  kubectl create configmap mssqlconf --from-file mssql.conf -n msql
+  416  oc  create configmap mssqlconf --from-file mssql.conf -n mssql
+  417  oc get configmaps  -n mssql
+  418  vi mssql-deployment-oltp_pod1_configMap.yml 
+  419  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  420  oc get pods -n mssql
+  421  oc delete -f mssql-deployment-oltp_pod1-
+  422  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  423  oc get pods -n mssql
+  424  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  425  oc get pods -n mssq
+  426  oc get pods -n mssql
+  427  oc logs mssql-dep1-pod1-6766798c56-xnp4t -n mssql
+  428  oc get configmap mssqlconf -n mssql
+  429  oc get configmap mssqlconf -n mssql -o yaml
+  430  clear
+  431  oc get pods -n mssql
+  432  oc logs mssql-dep1-pod1-6766798c56-xnp4t -n mssql
+  433  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  434  oc get scc
+  435  oc delete scc scc-admin 
+  436  vi mssql-ocp.yml 
+  437  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  438  oc get pods -n  mssql
+  439  oc logs mssql-dep1-pod1-6766798c56-cmnk7 -n mssql
+  440  vi mssql-deployment-oltp_pod1_configMap.yml 
+  441  od get pods -n mssql
+  442  oc get pods -n mssql
+  443  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  444  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  445  oc get pods -n mssql
+  446  oc logs mssql-dep1-pod1-5c8667bbd9-9mdf2 -n mssql
+  447  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  448  vi mssql-deployment-oltp_pod1_configMap.yml 
+  449  cat mssql.conf 
+  450  cp mssql.conf /var/opt/config/mssql.conf
+  451  ls /var/opt/
+  452  mkdir /var/opt/config
+  453  cp mssql.conf /var/opt/config/mssql.conf
+  454  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  455  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  456  oc get pods -n mssql
+  457  oc logs mssql-dep1-pod1-5c8667bbd9-5ggnx -n mssql
+  458  ls /var/opt/config/mssql.conf
+  459  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  460  vi mssql-deployment-oltp_pod1_configMap.yml 
+  461  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  462  vi mssql-deployment-oltp_pod1_configMap.yml 
+  463  oc get configmaps -n mssql
+  464  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  465  oc get pods -n mssql
+  466  oc logs mssql-dep1-pod1-686b5dc87c-brdz7 -n mssql
+  467  vi mssql-simple.conf
+  468  kubectl create configmap mssqlconf-simple --from-file mssql-simple.conf
+  469  kubectl create configmap mssqlconf-simple --from-file mssql-simple.conf -n mssql
+  470  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  471  vi mssql-deployment-oltp_pod1_configMap.yml 
+  472  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  473  oc get pods -n mssql
+  474  oc logs mssql-dep1-pod1-8b65c9b97-c4nvm -n mssql
+  475  oc get pods -n mssql
+  476  oc logs mssql-dep1-pod1-8b65c9b97-c4nvm -n mssql
+  477  oc describe pod mssql-dep1-pod1-8b65c9b97-c4nvm -n mssql
+  478  oc delete -f mssql-deployment-oltp_pod1
+  479  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  480  vi mssql-deployment-oltp_pod1_configMap.yml 
+  481  oc get configpmap -n mssql
+  482  oc get configmap  -n mssql
+  483  vi mssql-deployment-oltp_pod1_configMap.yml 
+  484  oc apply -f mssql-deployment-oltp_pod1_configMap.yml  -n mssql
+  485  oc get pods -n mssql
+  486  oc logs mssql-dep1-pod1-79846d8c7-4r82p -n ssql
+  487  oc logs mssql-dep1-pod1-79846d8c7-4r82p -n mssql
+  488  oc get events -n mssql
+  489  oc  delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  490  vi mssql-deployment-oltp_pod1_configMap.yml 
+  491  oc get pods -n mssql
+  492  oc apply -f mssql-deployment-oltp_pod1_configMap.yml  -n mssql
+  493  oc get pods -n mssql
+  494  oc logs mssql-dep1-pod1-5865df6b6d-blpwj -n mssql
+  495  oc get events -n mssql
+  496  clear
+  497  oc get pods -n mssql
+  498  oc apply -f ocp-scc.yml 
+  499  oc adm policy add-scc-to-group restrictedfsgroup system:serviceaccounts:mssql
+  500  oc get pods -n mssql
+  501  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  502  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  503  oc get pods -n mssql
+  504  oc logs mssql-dep1-pod1-5865df6b6d-6wzgm -n mssql
+  505  oc get events -n mssql
+  506  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  507  Clear
+  508  clear
+  509  oc get pvc -n mssql
+  510  oc delete pvc  pod1-log1-pvcpod1-data1-pvc -n mssql
+  511  oc delete pvc  pod1-log1-pvc pod1-data1-pvc -n mssql
+  512  oc delete ns mssql
+  513  oc get configmaps  -n mssql
+  514  oc get configmaps  
+  515  clear
+  516  oc create project mssql
+  517  oc new-project mssql
+  518  pwd
+  519  clear
+  520  oc get pods
+  521  cat mssql.conf 
+  522  kubectl create configmap mssqlconf --from-file mssql.conf 
+  523  oc apply -f mssql-data1-pvc.yml 
+  524  oc get pvc 
+  525  kubectl get configmap mssqlconf -o yaml
+  526  vi mssql-deployment-oltp_pod1_configMap.yml 
+  527  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  528  oc get pods 
+  529  cat mssql-secret.txt 
+  530  kubectl create secret generic mssql -n mssql --from-literal=SA_PASSWORD="H1ghV0lt"
+  531  oc get pods 
+  532  oc get events
+  533  oc get pods 
+  534  oc describe pod mssql-dep1-pod1-5865df6b6d-4kbg2
+  535  oc apply -f  mssql-log1-pvc.yml 
+  536  oc describe pod mssql-dep1-pod1-5865df6b6d-4kbg2
+  537  oc logs mssql-dep1-pod1-5865df6b6d-4kbg2
+  538  clear
+  539  oc get pods -n mssql
+  540  oc get pods -n mssql -o wide
+  541  oc exec mssql-dep1-pod1-5865df6b6d-4kbg2 -- cat /var/opt/mssql/msswl.conf
+  542  oc exec mssql-dep1-pod1-5865df6b6d-4kbg2 -- cat /var/opt/mssql/mssql.conf
+  543  clear
+  544  oc logs mssql-dep1-pod1-5865df6b6d-4kbg2
+  545  vi mssql-deployment-oltp_pod1_configMap.yml 
+  546  oc get nodes
+  547  oc get nodes -o wide
+  548  clear
+  549  oc get scc 
+  550  vi mssql-deployment-oltp_pod1_configMap.yml 
+  551  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  552  oc get pods 
+  553  oc delete -f ocp-scc.yml 
+  554  oc get scc
+  555  clear
+  556  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  557  oc get pods
+  558  oc get events
+  559  oc get pods -n mssql
+  560  vi mssql-deployment-oltp_pod1_configMap.yml 
+  561  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  562  oc get pods 
+  563  oc get scc
+  564  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  565  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  566  oc get pods
+  567  oc exec mssql-dep1-pod1-79846d8c7-9n4z6 -- cat /var/opt/mssql/mssql.conf
+  568  clear
+  569  vi mssql-deployment-oltp_pod1_configMap.yml 
+  570  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  571  oc apply -f mssql-deployment-oltp_pod1-
+  572  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  573  oc get pods 
+  574  oc apply -f ocp-scc.yml 
+  575  oc get deployment 
+  576  oc get pods 
+  577  oc get events
+  578  clear
+  579  oc adm policy remove-scc-from-group restrictedfsgroup 
+  580  oc adm policy remove-scc-from-group restrictedfsgroup system:serviceaccounts:mssql
+  581  oc get pods 
+  582  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  583  clear
+  584  oc get pods
+  585  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  586  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  587  oc get pods 
+  588  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  589  oc delete -f ocp-scc.yml 
+  590  clear
+  591  oc adm policy remove-scc-from-group restrictedfsgroup system:serviceaccounts:mssql
+  592  vi ocp-scc.yml 
+  593  oc get pods
+  594  oc delete-project mssql
+  595  oc delete project mssql
+  596  clear
+  597  oc create ns mssql
+  598  oc delete ns mssql
+  599  oc get ns | grep sql
+  600  oc get projects  | grep sql
+  601  oc get projects  
+  602  clear
+  603  oc get ns
+  604  oc delete ns test test1
+  605  clear
+  606  oc create ns mssql
+  607  oc apply ocp-scc.yml -f
+  608  oc apply -f ocp-scc.yml
+  609  vi mssql-deployment-oltp_pod1_configMap.yml 
+  610  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  611  oc get pods
+  612  cat mssql-secret.txt 
+  613  kubectl create secret generic mssql -n mssql --from-literal=SA_PASSWORD="H1ghV0lt"
+  614  oc get pods
+  615  oc apply -f mssql-data1-pvc.yml 
+  616  oc apply -f mssql-log1-pvc.yml 
+  617  oc create configmap mssqlconf --from-file mssql.conf
+  618  oc get pods
+  619  oc logs mssql-dep1-pod1-5865df6b6d-r99jk
+  620  oc get ppods
+  621  oc get pods
+  622  clear
+  623  oc get pods 
+  624  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  625  oc get scc
+  626  clear
+  627  oc get scc
+  628  oc delete scc restrictedfsgroup 
+  629  vi mssql-deployment-oltp_pod1_configMap.yml 
+  630  clear
+  631  oc get scc
+  632  clear
+  633  oc get pods
+  634  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  635  oc get pods
+  636  oc get events
+  637  clear
+  638  vi mssql-deployment-oltp_pod1_configMap.yml 
+  639  oc get pods
+  640  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  641  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  642  oc get pods
+  643  vi mssql-deployment-oltp_pod1_configMap.yml 
+  644  oc exec mssql-dep1-pod1-79846d8c7-kmmnf -- /bin/bash
+  645  oc exec mssql-dep1-pod1-79846d8c7-kmmnf -- /bin/bash/
+  646  oc exec mssql-dep1-pod1-79846d8c7-kmmnf -- /bin/bash
+  647  oc exec mssql-dep1-pod1-79846d8c7-kmmnf -it -- /bin/bash
+  648  od apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  649  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  650  oc get pvc
+  651  oc delete pvc pod1-data1-pvc pod1-log1-pvc 
+  652  clear
+  653  oc get ns | grep sql
+  654  oc delete project mssql
+  655  oc get ns | grep sql
+  656  clear
+  657  oc get scc
+  658  vi ocp-scc.yml 
+  659  oc adm policy remove-scc-from-group restrictedfsgroup system:serviceaccounts:mssql
+  660  clear
+  661  oc create ns mssql
+  662  cat mssql-secret.txt 
+  663  kubectl create secret generic mssql -n mssql --from-literal=SA_PASSWORD="H1ghV0lt"
+  664  oc apply -f mssql-data1-pvc.yml 
+  665  oc apply -f mssql-log1-pvc.yml 
+  666  vi mssql-deployment-oltp_pod1_configMap.yml 
+  667  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  668  oc get pods -n mssql
+  669  oc describe pod mssql-dep1-pod1-79846d8c7-rbdr4 -n mssql
+  670  oc create configmap mssqlconf --from-file mssql.conf -n mssql
+  671  oc get pods -n mssql
+  672  clear
+  673  oc get pods -n mssql
+  674  oc exec mssql-dep1-pod1-79846d8c7-rbdr4 -it -n mssql -- /bin/bash
+  675  oc delete -f mssql-deployment-oltp_pod1_configMap.yml 
+  676  clear
+  677  vi mssql-deployment-oltp_pod1_configMap.yml 
+  678  oc aply -f mssql-deployment-oltp_pod1-
+  679  clear
+  680  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  681  oc get pods
+  682  oc get events -n mssql
+  683  vi ocp-scc.yml 
+  684  oc apply -f ocp-scc.yml 
+  685  oc get pods -n mssql
+  686  vi mssql-deployment-oltp_pod1_configMap.yml 
+  687  oc apply -f mssql-deployment-oltp_pod1_configMap.yml 
+  688  oc get pods -n mssql
+  689  oc get events -n mssql
+  690  vi ocp-scc.yml 
+  691  clear
+  692  oc adm policy remove-scc-from-group restrictedfsgroup system:serviceaccounts:mssql
+  693  oc get scc
+  694  oc adm policy remove-scc-from-group restrictedfsgroup system:serviceaccounts:mssql 
+  695  oc adm policy remove-scc-from-group restrictedfsgroup system:serviceaccounts:mssql  -n mssql
+  696  oc apply -f ocp-scc.yml   -n mssql
+  697  oc get scc -n mssq
+  698  oc get pods 
+  699  clear
+  700  oc adm policy remove-scc-from-group restrictedfsgroup system:serviceaccounts:mssql 
+  701  oc adm policy remove-scc-from-group restrictedfsgroup system:serviceaccounts:mssql  -n mssql
+  702  vi ocp-scc.yml 
+  703  oc apply -f ocp-scc.yml 
+  704  oc adm policy add-scc-to-group restrictedfsgroup system:serviceaccounts:mssql
+  705  oc get pods
+  706  oc exec mssql-dep1-pod1-5865df6b6d-mhkbg -it -n mssql -- /bin/bash
+  707  oc get scc
+  708  vi ocp-scc.yml 
+  709  oc get scc restrictedfsgroup --o yml
+  710  oc get scc restrictedfsgroup -o yml
+  711  oc get scc restrictedfsgroup -output yml
+  712  oc get scc restrictedfsgroup -output yaml
+  713  oc get scc restrictedfsgroup --output yaml
+  714  vi ocp-scc.yml 
+  715  vi mssql-deployment-oltp_pod1_configMap.yml 
+  716  cat mssql.conf 
+  717  vi mssql-conf.yml 
+  718  vi mssql.conf 
+  719  vlrar
+  720  clear
+  721  cat mssql.conf 
+  722  oc create configmap mssqlconf --from-file mssql.conf
+  723  oc deleteconfigmap  mssqlconf
+  724  oc delete configmap  mssqlconf
+  725  clear
+  726  cat mssql.conf 
+  727  oc create configmap mssqlconf --from-file mssql.conf
+  728  clear
+  729  cp mssql.conf /root
+  730  cd 
+  731  oc delete configmap mssqlconf
+  732  clear
+  733  cat mssql.conf 
+  734  oc create configmap mssqlconf --from-file mssql.conf
+  735  cd /tpch-backup/ocp/scripts/px/
+  736  ls
+  737  cd sqlpods/
+  738  cd test-mssql-conf/
+  739  clear
+  740  cat ocp-scc.yml 
+  741  vi ocp-scc.yml 
+  742  vi mssql-deployment-oltp_pod1_configMap.yml 
+  743  vi mssql.conf 
+  744  cat mssql.conf 
+  745  clear
+  746  cd /tpch-backup/ansible
+  747  which git
+  748  git
+  749  cd roles/mssql/
+  750  ls
+  751  vi tasks/
+  752  cd tasks/
+  753  ls
+  754  cp create_sqlpod.yml  create_ocp_scc.yml
+  755  mv create_vps.yml create_px_vps.yml 
+  756  vi main.yml 
+  757  vi create_ocp_scc.yml 
+  758  vi main.yml 
+  759  ls
+  760  vi create_ocp_scc.yml add_ocp_scc_mssql_serviceaccount.yml
+  761  vi add_ocp_scc_mssql_serviceaccount.yml
+  762  cp create_ocp_scc.yml add_ocp_scc_mssql_sa.yml
+  763  vi add_ocp_scc_mssql_sa.yml 
+  764  clear
+  765  ls
+  766  vi main.yml 
+  767  vi create_ocp_scc.yml 
+  768  oc get pods -n mssql
+  769  cd ..
+  770  ansible-playbook deploy-mssqlpod.yml 
+  771  vi roles/mssql/tasks/create_ocp_scc.yml 
+  772  ansible-playbook deploy-mssqlpod.yml 
+  773  oc get pods -n mssql
+  774  oc get events -n mssql
+  775  oc get pods -n mssql
+  776  oc get events -n mssql
+  777  oc get pods -n mssq
+  778  oc get pods -n mssql
+  779  oc get deployments -n mssql
+  780  vi group_vars/all.yml 
+  781  oc get pvc -n mssql
+  782  oc delete pvc  pod1-data1-pvc pod1-log1-pvc  -n mssql
+  783  oc get scc
+  784  clear
+  785  ansible-playbook deploy-mssqlpod.yml 
+  786  vi group_vars/all.yml 
+  787  oc get pods -n cust2ns 
+  788  cp roles/mssql/tasks/create_sqlpod.yml create_mssql_configmap.yml
+  789  mv create_mssql_configmap.yml roles/mssql/tasks/create_mssql_configmap.yml
+  790  vi roles/mssql/tasks/create_mssql_configmap.yml 
+  791  vi roles/mssql/tasks/main.yml 
+  792  vi roles/mssql/tasks/create_sqlpod.yml 
+  793  clear
+  794  vi group_vars/all.yml 
+  795  ansible-playbook deploy-mssqlpod.yml 
+  796  vi /tpch-backup/ansible/roles/mssql/tasks/create_mssql_configmap.yml
+  797  ansible-playbook deploy-mssqlpod.yml 
+  798  vi /tpch-backup/ansible/roles/mssql/tasks/create_mssql_configmap.yml
+  799  ansible-playbook deploy-mssqlpod.yml 
+  800  oc get pod -n testns
+  801  oc describe pod mssql-dep-test-9c68cbfc-gkbfh -n testns
+  802  oc get configMap -n testns
+  803  oc get pvc -n test-ns
+  804  oc get pvc -n testns
+  805  clear
+  806  ls roles/mssql/tasks/
+  807  vi roles/mssql/tasks/add_ocp_scc_mssql_sa.yml 
+  808  vi roles/mssql/tasks/main.yml 
+  809  ansible-playbook deploy-mssqlpod.yml 
+  810  vi roles/mssql/tasks/add_ocp_scc_mssql_sa.yml 
+  811  ansible-playbook deploy-mssqlpod.yml 
+  812  vi roles/mssql/tasks/add_ocp_scc_mssql_sa.yml 
+  813  ansible-playbook deploy-mssqlpod.yml 
+  814  vi roles/mssql/tasks/add_ocp_scc_mssql_sa.yml 
+  815  ansible-playbook deploy-mssqlpod.yml 
+  816  vi roles/mssql/tasks/add_ocp_scc_mssql_sa.yml 
+  817  ansible-playbook deploy-mssqlpod.yml 
+  818  vi roles/mssql/tasks/add_ocp_scc_mssql_sa.yml 
+  819  ansible-playbook deploy-mssqlpod.yml 
+  820  vi roles/mssql/tasks/add_ocp_scc_mssql_sa.yml 
+  821  vi roles/mssql/files/mssql.conf
+  822  ansible-playbook deploy-mssqlpod.yml 
+  823  vi roles/mssql/tasks/add_ocp_scc_mssql_sa.yml 
+  824  ansible-playbook deploy-mssqlpod.yml 
+  825  vi roles/mssql/tasks/add_ocp_scc_mssql_sa.yml 
+  826  ansible-playbook deploy-mssqlpod.yml 
+  827  vi roles/mssql/tasks/add_ocp_scc_mssql_sa.yml 
+  828  ansible-playbook deploy-mssqlpod.yml 
+  829  vi roles/mssql/tasks/add_ocp_scc_mssql_sa.yml 
+  830  ansible-playbook deploy-mssqlpod.yml 
+  831  vi roles/mssql/tasks/add_ocp_scc_mssql_sa.yml 
+  832  ansible-playbook deploy-mssqlpod.yml 
+  833  clear
+  834  cd roles/mssql/
+  835  ls
+  836  cat files/mssql.conf 
+  837  cd tasks/
+  838  ls
+  839  cat create_mssql_configmap.yml 
+  840  clear
+  841  ls
+  842  cp add_ocp_scc_mssql_sa.yml create_mssql_configmap_from_file.yml
+  843  vi create_mssql_configmap_from_file.yml
+  844  vi main.yml 
+  845  cd ..
+  846  ansible-playbook deploy-mssqlpod.yml 
+  847  oc delete configmaps mssqlconf-test -n test
+  848  oc delete configmap mssqlconf-test  -n test
+  849  oc delete configmap mssqlconf-test  -n test-ns
+  850  oc delete configmap mssqlconf-test  -n testns
+  851  ansible-playbook deploy-mssqlpod.yml 
+  852  clear
+  853  vi roles/mssql/tasks/main.yml 
+  854  ls roles/mssql/tasks/
+  855  cat roles/mssql/tasks/main.yml 
+  856  vi group_vars/all.yml 
+  857  clear
+  858  ansible-playbook deploy-mssqlpod.yml 
+  859  oc get pods -n myns
+  860  oc get  all  -n myns
+  861  oc get pvc,configmap,scc,pod,service -n myns
+  862  vi roles/mssql/tasks/main.yml 
+  863  vi roles/mssql/tasks/create_mssql_configmap_from_file.yml
+  864  vi roles/mssql/tasks/main.yml 
+  865  cat  roles/mssql/tasks/create_mssql_configmap_from_file.yml
+  866  clear
+  867  vi group_vars/all.yml 
+  868  ansible-playbook deploy-mssqlpod.yml 
+  869  vi roles/mssql/tasks/create_ocp_scc.yml 
+  870  vi roles/mssql/tasks/add_ocp_scc_mssql_sa.yml 
+  871  vi roles/mssql/tasks/create_mssql_configmap_from_file.yml 
+  872  vi roles/mssql/tasks/create_secret.yml 
+  873  vi roles/mssql/tasks/create_datavol.yml 
+  874  vi roles/mssql/tasks/create_logvol.yml 
+  875  clear
+  876  vi group_vars/all.yml 
+  877  clear
+  878  ansible-playbook deploy-mssqlpod.yml 
+  879  vi roles/mssql/tasks/add_ocp_scc_mssql_sa.yml 
+  880  oc get pvc,configmap,secret,service,deployment,pod -n myns2
+  881  cat group_vars/all.yml 
+  882  oc exec mssql-dep-myns2pod-5d896965bc-4bfjx -n myns2 - car /var/opt/mssql/ssql.conf
+  883  oc exec mssql-dep-myns2pod-5d896965bc-4bfjx -n myns2 - cat /var/opt/mssql/ssql.conf
+  884  oc exec mssql-dep-myns2pod-5d896965bc-4bfjx -n myns2 -- cat /var/opt/mssql/mssql.conf
+  885  clear
+  886  cat roles/mssql/tasks/create_sqlpod.yml 
+  887  vi roles/mssql/tasks/create_sqlpod.yml 
+  888  vi deploy-mssqlpod.yml 
+  889  ansible-playbook deploy-mssqlpod.yml  --spell-check
+  890  ansible-playbook deploy-mssqlpod.yml  --syntax-check
+  891  vi deploy-mssqlpod.yml 
+  892  clear
+  893  oc get pods
+  894  oc get ns  | grep test
+  895  oc get ns  | grep cu
+  896  oc get pods -n testns 
+  897  oc get pods -n 
+  898  oc get pods -n cust2ns
+  899  oc get deployment -n cust2ns
+  900  oc delete deployment mssql-dep-cust2 -n cust2ns
+  901  oc get all -n cust2ns
+  902  oc get pvc,service,secret -n cust2ns
+  903  oc delete pvc cust2-datavol cust2-logvol  -n cust2nw
+  904  oc delete pvc cust2-datavol cust2-logvol  -n cust2ns
+  905  oc delete service cust2-svc -n cust2ns
+  906  oc delete ns cust2ns
+  907  oc get pvc,deployment,service, secret -n testns
+  908  oc get pvc,deployment,service, secret -n testn
+  909  oc get pvc,deployment,service, secret -n testns
+  910  clear
+  911  oc get pvc,deployment,service,secret -n testns
+  912  oc delete pvc test-svc -n testns
+  913  oc delete pvc test-datavol test-logvol  -n testns
+  914  oc deleet svc test-svc -n testns
+  915  oc delete svc test-svc -n testns
+  916  oc get secret -n mssql
+  917  oc get secret -n testns
+  918  oc delete secret test-secret -n testns
+  919  oc delete ns testns
+  920  cp deploy-mssqlpod.yml delete-mssqlpod.yml
+  921  vi delete-mssqlpod.yml 
+  922  ansible-playbook  delete-mssqlpod.yml 
+  923  vi delete-mssqlpod.yml 
+  924  ansible-playbook delete-mssqlpod.yml 
+  925  clear
+  926  vi delete-mssqlpod.yml 
+  927  clear
+  928  oc get ns | grep test
+  929  oc get ns | grep sql
+  930  oc get ns | grep cus
+  931  ls
+  932  cd roles/
+  933  ls
+  934  cd mssql/
+  935  ls
+  936  cat README.md 
+  937  clear
+  938  ls
+  939  cat defaults/main.yml 
+  940  cd ..
+  941  cat group_vars/all.yml 
+  942  ls
+  943  vi delete-mssqlpod.yml 
+  944  mv delete-mssqlpod.yml cleanup.yml
+  945  clear
+  946  vi group_vars/all.yml 
+  947  ansible-playbook deploy-mssqlpod.yml 
+  948  oc get pods -n mssql
+  949  oc get pods -n mssqloc get all -n mssql
+  950  oc get all -n mssql
+  951  oc get services -A
+  952  oc get services -A | grep 30001
+  953  oc delete svc myns2pod-svc -n myns2
+  954  oc delete ns myns2
+  955  ansible-playbook  cleanup.yml 
+  956  clear
+  957  vi group_vars/all.yml 
+  958  ansible-playbook deploy-mssqlpod.yml 
+  959  oc get pod -n sql
+  960  oc get pod,pvc,svc,secret  -n sql
+  961  oc get pod,pvc,svc,secret,configmap  -n sql
+  962  ansible-playbook cleanup.yml 
+  963  oc get pod,pvc,svc,secret,configmap  -n sql
+  964  clear
+  965  tree .
+  966  cat roles/mssql/tasks/ create_datavol.yml
+  967  cat roles/mssql/tasks/create_datavol.yml
+  968  cat group_vars/all.yml 
+  969  clear
+  970  ls
+  971  vi README.md
+  972  git login
+  973  git
+  974  git init
+  975  ls
+  976  git add .
+  977  git commit -m "first commit"
+  978  git config --global user.email "rgopunar@cisco.com"
+  979  git config --global user.name "Gopu Narasimha reddy"
+  980  git commit -m "first commit"
+  981  git branch -M main
+  982  git remote add origin https://github.com/rgopunar/MSSQL-Deployment.git
+  983  git push -u origin main
+  984  vi README.md 
+  985  git add .
+  986  git commit -m "next text added"
+  987  git put -u origin main
+  988  git push -u origin main
+  989  cat README.md 
+  990  ls
+  991  rm -f ~
+  992  rm -f '~'
+  993  ls
+  994  git add .
+  995  git commit -m "removed tilt"
+  996  git push -u origin main
+  997  history > hist.txt
+  998  vi hist.txt 
+  999  vi hist.txt  | grep coll
+ 1000  vi /tpch-backup/ansible
+ 1001  cd /tpch-backup/ansible
+ 1002  ls
+ 1003  cat hist.txt | grep col
+ 1004  vi hist.txt 
+ 1005  history > hist.txt 
+ 1006  vi hist.txt 
+ 1007  rm -f hist.txt 
+ 1008  history > his.txt
